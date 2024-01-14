@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-control form_group">
+        <input type="text" class="form-control text-center" name="original_statement" value='{{ proof }}' placeholder="Enter statement">
+        <input type="submit" value="Check Proof" name="check_proof" class="btn btn-dark form-control">
+    </div>
+</form>
+<center>
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col"><center>Symbol</center></th>
+                    <th scope="col"><center>Definition</center></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row"><center>-></center></td>
+                    <td scope="row"><center>if...then...</center></td>
+                </tr>
+                <tr>
+                    <td scope="row"><center>&</center></td>
+                    <td scope="row"><center>...and...</center></td>
+                </tr>
+                <tr>
+                    <td scope="row"><center>~</center></td>
+                    <td scope="row"><center>not...</center></td>
+                </tr>
+                <tr>
+                    <td scope="row"><center>v</center></td>
+                    <td scope="row"><center>...or...</center></td>
+                </tr>
+                <tr>
+                    <td scope="row"><center><--></center></td>
+                    <td scope="row"><center>if and only if</center></td>
+                </tr>
+                <tr>
+                    <td scope="row"><center>-|</center></td>
+                    <td scope="row"><center>divider</center></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <h4>{{ error }}</h4>
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col"><center>Assumption Dependence</center></th>
+                    <th scope="col"><center>Line #</center></th>
+                    <th scope="col"><center>Formula</center></th>
+                    <th scope="col"><center>Justification</center></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for line in complete_proof_table %}
+                    <tr>
+                        {% for item in line %}
+                            <td scope="row"><center>{{ item }}</center></td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</center>
+<script>
+</script>
+{% endblock %}
